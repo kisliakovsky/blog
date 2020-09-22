@@ -1,0 +1,9 @@
+.idea/
+blog.iml
+
+.gradle/
+
+adapter/build/
+app/build/
+build/
+domain/build/
