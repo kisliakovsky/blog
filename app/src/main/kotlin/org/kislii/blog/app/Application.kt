@@ -1,13 +1,18 @@
 package org.kislii.blog.app
 
-class Application {
+import org.takes.http.Exit
+import org.takes.http.FtBasic
+
+class Application(private val port: Int, private val exit: Exit) {
+
+    constructor(port: Int) : this(port, { false })
 
     fun start() {
-        println("Blog app is starting!")
+        FtBasic(WebServer(), port)
+            .start(exit)
     }
 }
 
 fun main() {
-    val app = Application()
-    app.start()
+    Application(8080).start()
 }
