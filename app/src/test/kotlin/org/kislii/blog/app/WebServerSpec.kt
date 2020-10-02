@@ -6,7 +6,7 @@ import org.hamcrest.Matchers.equalTo
 import org.junit.jupiter.api.Test
 import org.takes.http.FtRemote
 
-class WebServerSpec {
+internal class WebServerSpec {
 
     @Test
     fun `GET returns text page`() {

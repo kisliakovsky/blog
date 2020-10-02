@@ -21,6 +21,7 @@ tasks {
     }
 }
 
+val jacksonVersion: String by project
 val javaxWsRsVersion: String by project
 val jcabiVersion: String by project
 val jerseyVersion: String by project
@@ -30,6 +31,7 @@ dependencies {
     implementation(project(":adapter"))
     implementation(project(":domain"))
     implementation(kotlin("stdlib"))
+    implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
     implementation("org.takes:takes:$takesVersion")
     testImplementation("com.jcabi:jcabi-http:$jcabiVersion")
     testImplementation("javax.ws.rs:javax.ws.rs-api:$javaxWsRsVersion")

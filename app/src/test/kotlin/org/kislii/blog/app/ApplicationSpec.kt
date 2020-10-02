@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import java.util.concurrent.Executors.newSingleThreadExecutor
 
-class ApplicationSpec {
+internal class ApplicationSpec {
 
     companion object {
 
