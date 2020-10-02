@@ -1,16 +1,20 @@
 package org.kislii.blog.app
 
-import org.takes.Request
-import org.takes.Response
-import org.takes.Take
-import org.takes.facets.fork.FkRegex
+import org.kislii.blog.app.post.FkPosts
+import org.kislii.blog.domain.post.Post.FakePost
+import org.kislii.blog.domain.post.Posts.FakePosts
 import org.takes.facets.fork.TkFork
+import org.takes.tk.TkWrap
+import java.time.Instant
 
-class WebServer(private val delegate: Take) : Take {
-
-    constructor() : this(TkFork(FkRegex("/", "Hello, world!")))
-
-    override fun act(req: Request?): Response {
-        return delegate.act(req)
-    }
-}
+class WebServer : TkWrap(
+    TkFork(
+        FkPosts(
+            FakePosts(
+                listOf(
+                    FakePost(0, Instant.parse("2020-09-03T10:15:30.00Z"), "Hello, world!")
+                )
+            )
+        )
+    )
+)

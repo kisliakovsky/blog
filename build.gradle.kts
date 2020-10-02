@@ -34,7 +34,6 @@ subprojects {
         implementation("org.slf4j:slf4j-api:$slf4jVersion")
         implementation("org.slf4j:slf4j-simple:$slf4jVersion")
         testImplementation("org.assertj:assertj-core:$assertjVersion")
-        testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
         testImplementation(platform("org.junit:junit-bom:$junitVersion"))
         testImplementation("org.junit.jupiter:junit-jupiter")
     }

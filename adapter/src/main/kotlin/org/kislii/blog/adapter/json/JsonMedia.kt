@@ -1,4 +1,4 @@
-package org.kislii.blog.app
+package org.kislii.blog.adapter.json
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper

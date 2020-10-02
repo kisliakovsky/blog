@@ -1,4 +1,4 @@
-package org.kislii.blog.app
+package org.kislii.blog.adapter.json
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions.assertThat
@@ -9,7 +9,7 @@ internal class JsonMediaTest {
     private val objectMapper: ObjectMapper = ObjectMapper()
 
     @Test
-    fun returns_json_media_with_new_key_value_pair() {
+    fun `returns json media with new key value pair`() {
         // when
         val media = JsonMedia().with("key", "value")
 
@@ -25,7 +25,7 @@ internal class JsonMediaTest {
     }
 
     @Test
-    fun returns_json_media_with_array_of_strings() {
+    fun `returns json media with array of strings`() {
         // when
         val media = JsonMedia().with("key", listOf("value1", "value2"))
 
@@ -41,7 +41,7 @@ internal class JsonMediaTest {
     }
 
     @Test
-    fun returns_json_media_with_nested_json() {
+    fun `returns json media with nested json`() {
         // when
         val media = JsonMedia().with(
             "key",
@@ -65,7 +65,7 @@ internal class JsonMediaTest {
     }
 
     @Test
-    fun returns_json_media_with_nested_json_media() {
+    fun `returns json media with nested json media`() {
         // when
         val media = JsonMedia().with("key", JsonMedia().with("key", "value"))
 
@@ -85,7 +85,7 @@ internal class JsonMediaTest {
     }
 
     @Test
-    fun returns_json_media_with_array_of_media() {
+    fun `returns json media with array of media`() {
         // when
         val media = JsonMedia().with(
             "key",
@@ -116,7 +116,7 @@ internal class JsonMediaTest {
     }
 
     @Test
-    fun returns_json_string() {
+    fun `returns json string`() {
         // when
         val jsonString = JsonMedia().with(
             "key",

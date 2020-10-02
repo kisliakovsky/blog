@@ -13,10 +13,13 @@ internal class WebServerSpec {
         FtRemote(WebServer())
             .exec { home ->
                 JdkRequest(home)
+                    .uri()
+                    .path("/posts")
+                    .back()
                     .fetch()
                     .`as`(RestResponse::class.java)
                     .assertStatus(200)
-                    .assertBody(equalTo("Hello, world!"))
+                    .assertBody(equalTo("""[{"id":"0","date":"1599128130000","title":"Hello, world!"}]"""))
             }
     }
 }

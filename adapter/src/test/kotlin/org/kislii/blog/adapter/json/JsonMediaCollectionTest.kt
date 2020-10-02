@@ -1,4 +1,4 @@
-package org.kislii.blog.app
+package org.kislii.blog.adapter.json
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions.assertThat
@@ -9,7 +9,7 @@ internal class JsonMediaCollectionTest {
     private val objectMapper: ObjectMapper = ObjectMapper()
 
     @Test
-    fun returns_media_collection_with_new_media() {
+    fun `returns media_collection with new media`() {
         // when
         val collection = JsonMediaCollection().with(JsonMedia().with("key", "value"))
 
@@ -47,7 +47,7 @@ internal class JsonMediaCollectionTest {
     }
 
     @Test
-    fun returns_json_array() {
+    fun `returns json array`() {
         // when
         val jsonString = JsonMediaCollection().collection(listOf(JsonMedia().with("key", "value")))
             .asString()
