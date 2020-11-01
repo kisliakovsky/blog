@@ -3,21 +3,19 @@ package org.kislii.blog.app
 import com.jcabi.http.request.JdkRequest
 import com.jcabi.http.response.RestResponse
 import org.hamcrest.Matchers.equalTo
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
 import java.util.concurrent.Executors.newSingleThreadExecutor
 
+@TestInstance(PER_CLASS)
 internal class ApplicationSpec {
 
-    companion object {
-
-        @BeforeAll
-        @JvmStatic
-        internal fun `set up`() {
-            newSingleThreadExecutor().submit {
-                Application(8080).start()
-            }
+    init {
+        newSingleThreadExecutor().execute {
+            BasicApplication(8080).start()
         }
+        Thread.sleep(50)
     }
 
     @Test

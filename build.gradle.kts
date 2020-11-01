@@ -24,6 +24,7 @@ allprojects {
 val assertjVersion: String by project
 val hamcrestVersion: String by project
 val junitVersion: String by project
+val logbackVersion: String by project
 val slf4jVersion: String by project
 
 subprojects {
@@ -31,8 +32,9 @@ subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
     dependencies {
+        implementation("ch.qos.logback:logback-classic:$logbackVersion")
+        implementation("ch.qos.logback:logback-core:$logbackVersion")
         implementation("org.slf4j:slf4j-api:$slf4jVersion")
-        implementation("org.slf4j:slf4j-simple:$slf4jVersion")
         testImplementation("org.assertj:assertj-core:$assertjVersion")
         testImplementation(platform("org.junit:junit-bom:$junitVersion"))
         testImplementation("org.junit.jupiter:junit-jupiter")
