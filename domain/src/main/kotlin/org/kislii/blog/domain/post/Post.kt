@@ -6,23 +6,7 @@ import java.time.Instant
 
 interface Post : View {
 
-    fun id(): Long
-    fun date(): Instant
-    fun title(): String
-
     class FakePost(private val id: Long, private val date: Instant, private val title: String) : Post {
-
-        override fun id(): Long {
-            return id
-        }
-
-        override fun date(): Instant {
-            return date
-        }
-
-        override fun title(): String {
-            return title
-        }
 
         override fun <T> printed(media: Media<T>): Media<T> {
             return media.with("id", id.toString())
