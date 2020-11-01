@@ -4,19 +4,19 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class JsonMediaCollectionTest {
+internal class JsonArrayTest {
 
     private val objectMapper: ObjectMapper = ObjectMapper()
 
     @Test
     fun `returns media_collection with new media`() {
         // when
-        val collection = JsonMediaCollection().with(JsonMedia().with("key", "value"))
+        val collection = JsonArray().with(JsonObject().with("key", "value"))
 
         // then
         assertThat(collection)
             .isEqualTo(
-                JsonMediaCollection(
+                JsonArray(
                     objectMapper,
                     objectMapper.createArrayNode()
                         .add(
@@ -30,12 +30,12 @@ internal class JsonMediaCollectionTest {
     @Test
     fun returns_media_collection() {
         // when
-        val collection = JsonMediaCollection().collection(listOf(JsonMedia().with("key", "value")))
+        val collection = JsonArray().collection(listOf(JsonObject().with("key", "value")))
 
         // then
         assertThat(collection)
             .isEqualTo(
-                JsonMediaCollection(
+                JsonArray(
                     objectMapper,
                     objectMapper.createArrayNode()
                         .add(
@@ -49,7 +49,7 @@ internal class JsonMediaCollectionTest {
     @Test
     fun `returns json array`() {
         // when
-        val jsonString = JsonMediaCollection().collection(listOf(JsonMedia().with("key", "value")))
+        val jsonString = JsonArray().collection(listOf(JsonObject().with("key", "value")))
             .asString()
 
         // then

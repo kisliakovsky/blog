@@ -4,19 +4,19 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class JsonMediaTest {
+internal class JsonObjectTest {
 
     private val objectMapper: ObjectMapper = ObjectMapper()
 
     @Test
     fun `returns json media with new key value pair`() {
         // when
-        val media = JsonMedia().with("key", "value")
+        val media = JsonObject().with("key", "value")
 
         // then
         assertThat(media)
             .isEqualTo(
-                JsonMedia(
+                JsonObject(
                     objectMapper,
                     objectMapper.createObjectNode()
                         .put("key", "value")
@@ -27,12 +27,12 @@ internal class JsonMediaTest {
     @Test
     fun `returns json media with array of strings`() {
         // when
-        val media = JsonMedia().with("key", listOf("value1", "value2"))
+        val media = JsonObject().with("key", listOf("value1", "value2"))
 
         // then
         assertThat(media)
             .isEqualTo(
-                JsonMedia(
+                JsonObject(
                     objectMapper,
                     objectMapper.createObjectNode()
                         .set("key", objectMapper.createArrayNode().add("value1").add("value2"))
@@ -43,7 +43,7 @@ internal class JsonMediaTest {
     @Test
     fun `returns json media with nested json`() {
         // when
-        val media = JsonMedia().with(
+        val media = JsonObject().with(
             "key",
             objectMapper.createObjectNode()
                 .put("key", "value")
@@ -52,7 +52,7 @@ internal class JsonMediaTest {
         // then
         assertThat(media)
             .isEqualTo(
-                JsonMedia(
+                JsonObject(
                     objectMapper,
                     objectMapper.createObjectNode()
                         .set(
@@ -67,12 +67,12 @@ internal class JsonMediaTest {
     @Test
     fun `returns json media with nested json media`() {
         // when
-        val media = JsonMedia().with("key", JsonMedia().with("key", "value"))
+        val media = JsonObject().with("key", JsonObject().with("key", "value"))
 
         // then
         assertThat(media)
             .isEqualTo(
-                JsonMedia(
+                JsonObject(
                     objectMapper,
                     objectMapper.createObjectNode()
                         .set(
@@ -87,16 +87,16 @@ internal class JsonMediaTest {
     @Test
     fun `returns json media with array of media`() {
         // when
-        val media = JsonMedia().with(
+        val media = JsonObject().with(
             "key",
-            JsonMediaCollection()
-                .collection(listOf(JsonMedia().with("key", "value"), JsonMedia().with("key", "value")))
+            JsonArray()
+                .collection(listOf(JsonObject().with("key", "value"), JsonObject().with("key", "value")))
         )
 
         // then
         assertThat(media)
             .isEqualTo(
-                JsonMedia(
+                JsonObject(
                     objectMapper,
                     objectMapper.createObjectNode()
                         .set(
@@ -118,10 +118,10 @@ internal class JsonMediaTest {
     @Test
     fun `returns json string`() {
         // when
-        val jsonString = JsonMedia().with(
+        val jsonString = JsonObject().with(
             "key",
-            JsonMediaCollection()
-                .collection(listOf(JsonMedia().with("key", "value"), JsonMedia().with("key", "value")))
+            JsonArray()
+                .collection(listOf(JsonObject().with("key", "value"), JsonObject().with("key", "value")))
         ).asString()
 
         // then

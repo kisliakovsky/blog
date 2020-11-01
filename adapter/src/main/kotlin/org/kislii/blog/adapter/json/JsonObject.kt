@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.node.TextNode
 import org.kislii.blog.domain.Media
 import org.kislii.blog.domain.MediaCollection
 
-class JsonMedia(private val objectMapper: ObjectMapper, private val objectNode: ObjectNode) : Media<ObjectNode> {
+class JsonObject(private val objectMapper: ObjectMapper, private val objectNode: ObjectNode) : Media<ObjectNode> {
 
     constructor(objectMapper: ObjectMapper) : this(objectMapper, objectMapper.createObjectNode())
 
@@ -16,12 +16,12 @@ class JsonMedia(private val objectMapper: ObjectMapper, private val objectNode: 
 
     override fun with(key: String, value: String): Media<ObjectNode> {
         objectNode.put(key, value)
-        return JsonMedia(objectMapper, objectNode.deepCopy())
+        return JsonObject(objectMapper, objectNode.deepCopy())
     }
 
     override fun with(key: String, value: ObjectNode): Media<ObjectNode> {
         objectNode.set<ObjectNode>(key, value)
-        return JsonMedia(objectMapper, objectNode.deepCopy())
+        return JsonObject(objectMapper, objectNode.deepCopy())
     }
 
     override fun with(key: String, values: Collection<String>): Media<ObjectNode> {
@@ -34,7 +34,7 @@ class JsonMedia(private val objectMapper: ObjectMapper, private val objectNode: 
                         .toList()
                 )
         )
-        return JsonMedia(objectMapper, objectNode.deepCopy())
+        return JsonObject(objectMapper, objectNode.deepCopy())
     }
 
     override fun with(key: String, value: Media<ObjectNode>): Media<ObjectNode> {
@@ -47,7 +47,7 @@ class JsonMedia(private val objectMapper: ObjectMapper, private val objectNode: 
             objectMapper.createArrayNode()
                 .addAll(objectMapper.readValue(collection.asString(), object : TypeReference<List<ObjectNode>>() {}))
         )
-        return JsonMedia(objectMapper, objectNode.deepCopy())
+        return JsonObject(objectMapper, objectNode.deepCopy())
     }
 
     override fun asString(): String {
@@ -58,7 +58,7 @@ class JsonMedia(private val objectMapper: ObjectMapper, private val objectNode: 
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as JsonMedia
+        other as JsonObject
 
         if (objectNode != other.objectNode) return false
 

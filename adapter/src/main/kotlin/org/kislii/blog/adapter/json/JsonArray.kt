@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import org.kislii.blog.domain.Media
 import org.kislii.blog.domain.MediaCollection
 
-class JsonMediaCollection(private val objectMapper: ObjectMapper, private val arrayNode: ArrayNode) : MediaCollection<ObjectNode> {
+class JsonArray(private val objectMapper: ObjectMapper, private val arrayNode: ArrayNode) : MediaCollection<ObjectNode> {
 
     constructor(objectMapper: ObjectMapper) : this(objectMapper, objectMapper.createArrayNode())
 
@@ -14,7 +14,7 @@ class JsonMediaCollection(private val objectMapper: ObjectMapper, private val ar
 
     override fun with(media: Media<ObjectNode>): MediaCollection<ObjectNode> {
         arrayNode.add(objectMapper.readValue(media.asString(), ObjectNode::class.java))
-        return JsonMediaCollection(objectMapper, arrayNode.deepCopy())
+        return JsonArray(objectMapper, arrayNode.deepCopy())
     }
 
     override fun collection(collection: Collection<Media<ObjectNode>>): MediaCollection<ObjectNode> {
@@ -32,7 +32,7 @@ class JsonMediaCollection(private val objectMapper: ObjectMapper, private val ar
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as JsonMediaCollection
+        other as JsonArray
 
         if (arrayNode != other.arrayNode) return false
 
