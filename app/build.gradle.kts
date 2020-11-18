@@ -1,6 +1,5 @@
 plugins {
     application
-    kotlin("jvm")
 }
 
 val mainClass = "org.kislii.blog.app.ApplicationKt"
@@ -30,7 +29,6 @@ val takesVersion: String by project
 dependencies {
     implementation(project(":adapter"))
     implementation(project(":domain"))
-    implementation(kotlin("stdlib"))
     implementation("org.takes:takes:$takesVersion")
     testImplementation("com.jcabi:jcabi-http:$jcabiVersion")
     testImplementation("javax.ws.rs:javax.ws.rs-api:$javaxWsRsVersion")

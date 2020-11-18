@@ -32,6 +32,7 @@ subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
     dependencies {
+        implementation(kotlin("stdlib"))
         implementation("ch.qos.logback:logback-classic:$logbackVersion")
         implementation("ch.qos.logback:logback-core:$logbackVersion")
         implementation("org.slf4j:slf4j-api:$slf4jVersion")
